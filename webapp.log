@@ -1205,3 +1205,10 @@ net/http.(*conn).serve(0x1400015a090, {0x1009be1b8, 0x1400007d500})
 	/usr/local/go/src/net/http/server.go:2039 +0x508
 created by net/http.(*Server).Serve in goroutine 1
 	/usr/local/go/src/net/http/server.go:3285 +0x3f0
+2024/06/30 15:39:33 route_auth.go:107: パスワードが一致しません
+2024/06/30 15:39:44 route_auth.go:107: パスワードが一致しません
+2024/06/30 15:56:10 route_auth.go:102: パスワードが一致しません
+2024/06/30 15:56:17 route_auth.go:95: sql: no rows in result set
+2024/06/30 15:56:21 route_auth.go:95: sql: no rows in result set
+2024/06/30 15:56:27 route_auth.go:102: パスワードが一致しません
+2024/06/30 15:57:35 route_auth.go:102: パスワードが一致しません

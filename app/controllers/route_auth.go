@@ -5,6 +5,7 @@ import (
 	"net/http"
     // "github.com/yuta82644/go-todo_app/app/app/controllers"
 	"github.com/yuta82644/go-todo_app/app/models"
+    "golang.org/x/crypto/bcrypt"//password
 )
 
 // 新規登録
@@ -50,33 +51,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 }
 
 
-
-
-// //session
-// func authenticate(w http.ResponseWriter, r *http.Request) {
-// 	err := r.ParseForm()
-//     user, err := models.GetUserByEmail(r.PostFormValue("email"))
-// 	if err != nil {
-// 		log.Println(err)
-// 		http.Redirect(w, r, "/login", http.StatusFound) //302
-// 	}
-//     if user.Password == models.HashPassword(r.PostFormValue("password")) {
-//         session, err := user.CreateSession()
-//         if err != nil {
-//             log.Println(err)
-//         }
-//         cookie := http.Cookie{
-//             Name:       "_cookie",
-//             Value:      session.UUID,
-//             HttpOnly:   true,
-//         }
-//         http.SetCookie(w, &cookie)
-
-//         http.Redirect(w, r, "/", http.StatusFound)
-//     } else {
-//         http.Redirect(w, r, "/login", http.StatusFound)
-//     }
-// }
 	
 func authenticate(w http.ResponseWriter, r *http.Request) {
     err := r.ParseForm()
@@ -96,18 +70,14 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    hashedPassword, err := models.HashPassword(password)
-    if err != nil {
-        log.Println(err)
-        http.Redirect(w, r, "/login", http.StatusFound)
-        return
-    }
-
-    if user.Password != hashedPassword {
+     // 入力されたパスワードをハッシュ化して、データベースのハッシュと比較する
+     if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
         log.Println("パスワードが一致しません")
         http.Redirect(w, r, "/login", http.StatusFound)
         return
     }
+
+
 
     session, err := user.CreateSession()
     if err != nil {
