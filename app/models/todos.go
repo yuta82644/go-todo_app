@@ -82,6 +82,7 @@ func (u *User) GetTodosByUser() (todos []Todo, err error) {
 		&todo.Content, 
 		&todo.UserID, 
 		&todo.CreatedAt)
+		
 		if err != nil {
 			log.Fatalln(err)
 		}

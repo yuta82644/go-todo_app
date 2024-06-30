@@ -1,4 +1,11 @@
 {{ define "content" }}
 
-<h1>index</h1>
+UserName: {{ .Name }}
+<h1>TodoApp</h1>
+<hr>
+{{ range .Todos }}
+<div>{{ .Content }}</div>
+<hr>
+{{ end }}
+
 {{ end }}

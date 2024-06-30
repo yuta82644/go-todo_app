@@ -2,8 +2,10 @@ package controllers
 
 import (
 	// "html/template"
+	"log"
 	"net/http"
 	// "log"
+	// "github.com/yuta82644/go-todo_app/app/app/models"
 )
 
 func top(w http.ResponseWriter, r *http.Request) {
@@ -16,10 +18,16 @@ func top(w http.ResponseWriter, r *http.Request) {
 }
   //アクセス制限、ログインしている場合は
   func index(w http.ResponseWriter, r *http.Request) {
-	_, err := session(w, r)
+	sess, err := session(w, r)
 	if err != nil {
 		http.Redirect(w, r, "/", http.StatusFound)
 	} else {
-		generateHTML(w, nil, "layout", "private_navbar", "index")
+		user, err := sess.GetUserBySession()
+		if err != nil{
+			log.Println(err)
+		}
+		todos, _ := user.GetTodosByUser()
+		user.Todos = todos
+		generateHTML(w, user, "layout", "private_navbar", "index")
 	}
   }
