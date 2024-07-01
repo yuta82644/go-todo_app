@@ -9,7 +9,7 @@ import (
     "github.com/yuta82644/go-todo_app/config"
 )
 
-func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) {
+func generateHTML(writer http.ResponseWriter, data interface{}, filenames ...string) {
     var files []string
     for _, file := range filenames {
         files = append(files, fmt.Sprintf("app/views/templates/%s.html", file))
@@ -17,14 +17,14 @@ func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) 
 
     templates, err := template.ParseFiles(files...)
     if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
+        http.Error(writer, err.Error(), http.StatusInternalServerError)
         log.Println(err)
         return
     }
 
-    err = templates.ExecuteTemplate(w, "layout", data)
+    err = templates.ExecuteTemplate(writer, "layout", data)
     if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
+        http.Error(writer, err.Error(), http.StatusInternalServerError)
         log.Println(err)
     }
 }

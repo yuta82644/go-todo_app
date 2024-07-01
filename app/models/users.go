@@ -21,11 +21,11 @@ type Session struct {
     ID        int
     UUID      string
     Email     string
-    UserID    string
+    UserID    int
     CreatedAt time.Time
 }
 
-func (u *User) CreateUser() error {
+func (u *User) CreateUser() (err error) {
     hashedPassword, err := HashPassword(u.Password)
     if err != nil {
         return err
@@ -52,10 +52,10 @@ func (u *User) CreateUser() error {
     return err
 }
 
-func GetUser(id int) (User, error) {
-    user := User{}
+func GetUser(id int) (user User, err error) {
+    user = User{}
     cmd := `SELECT id, uuid, name, email, password, created_at FROM users WHERE id = ?`
-    err := Db.QueryRow(cmd, id).Scan(
+    err = Db.QueryRow(cmd, id).Scan(
         &user.ID,
         &user.UUID,
         &user.Name,
@@ -63,24 +63,22 @@ func GetUser(id int) (User, error) {
         &user.Password,
         &user.CreatedAt,
     )
-    if err != nil {
-        log.Println(err)
-    }
     return user, err
 }
 
-func (u *User) UpdateUser() error {
+
+func (u *User) UpdateUser() (err error) {
     cmd := `UPDATE users SET name = ?, email = ? WHERE id = ?`
-    _, err := Db.Exec(cmd, u.Name, u.Email, u.ID)
+    _, err = Db.Exec(cmd, u.Name, u.Email, u.ID)
     if err != nil {
         log.Println(err)
     }
     return err
 }
 
-func (u *User) DeleteUser() error {
+func (u *User) DeleteUser() (err error) {
     cmd := `DELETE FROM users WHERE id = ?`
-    _, err := Db.Exec(cmd, u.ID)
+    _, err = Db.Exec(cmd, u.ID)
     if err != nil {
         log.Println(err)
     }

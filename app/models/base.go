@@ -33,8 +33,7 @@ func init() {
         name STRING,
         email STRIMG,
         password STRING,
-        created_at DATETIME
-    )`, tableNameUser)
+        created_at DATETIME)`, tableNameUser)
 
     Db.Exec(cmdU)
 
@@ -59,7 +58,7 @@ func init() {
 
 //UUID
 func createUUID() (uuidobj uuid.UUID) {
-    uuidobj, _= uuid.NewUUID()
+    uuidobj, _ = uuid.NewUUID()
     return uuidobj
 }
 // HashPassword 

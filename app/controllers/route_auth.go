@@ -93,8 +93,9 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
     }
     http.SetCookie(w, &cookie)
 
-    http.Redirect(w, r, "/login", http.StatusFound)
-}
+    http.Redirect(w, r, "/", http.StatusFound)
+} 
+
 
 func logout(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("_cookie")

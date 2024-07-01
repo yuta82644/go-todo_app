@@ -1216,3 +1216,5 @@ created by net/http.(*Server).Serve in goroutine 1
 2024/06/30 17:02:19 server.go:21: template: index.html:3: function "user" not defined
 2024/06/30 17:02:20 server.go:21: template: index.html:3: function "user" not defined
 2024/06/30 17:02:20 server.go:21: template: index.html:3: function "user" not defined
+2024/07/01 00:23:04 route_auth.go:68: sql: no rows in result set
+2024/07/01 14:59:01 route_auth.go:75: パスワードが一致しません
