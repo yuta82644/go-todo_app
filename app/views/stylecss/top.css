@@ -1,3 +1,28 @@
+
+html {
+    font-size: 100%;
+}
+
 h1 {
-    color: blue;
+    color: rgb(89, 90, 98);
+    font-size: 24px;
+}
+
+a {
+    color: rgb(122, 119, 119);
+    text-decoration: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.btn {
+    margin-left: 200px;
+    color: black;
+}
+
+.content {
+    margin-left: 100px;
+    font-size: 1.2rem;
 }

@@ -6,9 +6,17 @@ UserName: {{ .Name }}
 <p>[<a href="todos/new">Create</a>]</p>
 <hr>
 {{ range .Todos }}
-<div>{{ .Content }}</div>
-<p>[<a href="/todos/edit/{{.ID}}">Edit</a>]</p>
-<p>[<a href="/todos/delete/{{.ID}}">Delete</a>]</p>
+
+<div class="flex">
+
+   <div class="content">
+       {{ .Content }}
+    </div>
+   <div class="btn">
+       <p>[<a href="/todos/edit/{{.ID}}">Edit</a>]</p>
+       <p>[<a href="/todos/delete/{{.ID}}">Delete</a>]</p>
+    </div> 
+</div>
 <hr>
 {{ end }}
 
